@@ -3,7 +3,10 @@ package org.agmas.scythes.items;
 import eu.pb4.polymer.common.api.PolymerCommonUtils;
 import eu.pb4.polymer.core.api.item.PolymerItem;
 import eu.pb4.polymer.core.api.utils.PolymerUtils;
+import eu.pb4.polymer.resourcepack.api.PolymerModelData;
+import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.minecraft.block.Block;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.Entity;
@@ -12,8 +15,10 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.item.*;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.network.packet.s2c.play.PlayerAbilitiesS2CPacket;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -92,6 +97,34 @@ public class Scythe extends ToolItem implements PolymerItem {
     }
 
     @Override
+    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, RegistryWrapper.WrapperLookup lookup, @Nullable ServerPlayerEntity player) {
+        var itemStack1 = PolymerItem.super.getPolymerItemStack(itemStack, tooltipType, lookup, player);
+        PolymerModelData modelData = PolymerResourcePackUtils.requestModel(itemStack1.getItem(), Identifier.of("scythes", "item/cloud_scythe"));
+        if (itemStack.getItem() instanceof Scythe s) {
+            if (s.toolMaterial == ToolMaterials.IRON) {
+                modelData = PolymerResourcePackUtils.requestModel(itemStack1.getItem(), Identifier.of("scythes", "item/iron_scythe"));
+            }
+            if (s.toolMaterial == ToolMaterials.DIAMOND) {
+                modelData = PolymerResourcePackUtils.requestModel(itemStack1.getItem(), Identifier.of("scythes", "item/diamond_scythe"));
+            }
+            if (s.toolMaterial == ToolMaterials.NETHERITE) {
+                modelData = PolymerResourcePackUtils.requestModel(itemStack1.getItem(), Identifier.of("scythes", "item/netherite_scythe"));
+            }
+            if (s.toolMaterial == ToolMaterials.STONE) {
+                modelData = PolymerResourcePackUtils.requestModel(itemStack1.getItem(), Identifier.of("scythes", "item/stone_scythe"));
+            }
+            if (s.toolMaterial == ToolMaterials.WOOD) {
+                modelData = PolymerResourcePackUtils.requestModel(itemStack1.getItem(), Identifier.of("scythes", "item/wooden_scythe"));
+            }
+            if (s.toolMaterial == ToolMaterials.GOLD) {
+                modelData = PolymerResourcePackUtils.requestModel(itemStack1.getItem(), Identifier.of("scythes", "item/golden_scythe"));
+            }
+        }
+        itemStack1.set(DataComponentTypes.CUSTOM_MODEL_DATA, modelData.asComponent());
+        return itemStack1;
+    }
+
+    @Override
     public Item getPolymerItem(ItemStack itemStack, @Nullable ServerPlayerEntity player) {
         try {
             if (itemStack.getItem() instanceof Scythe s) {
@@ -105,6 +138,7 @@ public class Scythe extends ToolItem implements PolymerItem {
                 IDK I TRIED TO AND IT FOR SOME REASOn CAUSED TEN BILLION ERRORS IMS ORRYY
 
                  */
+
                 if (s.toolMaterial == ToolMaterials.IRON) {
                     return Items.IRON_HOE.asItem();
                 }
