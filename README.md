@@ -6,7 +6,7 @@ Adds in Scythes, a new weapon that increases attack reach by 2.6m instead of att
 
 # Resource Pack
 - Install [Polymer](https://modrinth.com/mod/polymer)
-- Follow [this guide](https://polymer.pb4.eu/latest/user/resource-pack-hosting/) for up-to-date details on how to host your pack for your specific scenario.
+  - Follow [this guide](https://polymer.pb4.eu/latest/user/resource-pack-hosting/) for up-to-date details on how to host your pack for your specific scenario.
 
 # Recipes
 ![Crafting Recipe](https://cdn.modrinth.com/data/cached_images/82291a48888473be6a6e7a6282180b81a73ff226.png)
