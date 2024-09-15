@@ -10,6 +10,12 @@ Adds in Scythes, a new weapon that increases attack reach by 2.6m instead of att
 
 - **Make sure to run** `/polymer generate-pack` and rejoin your server to see the textures properly.
 
+# Obtaining
+
+- The crafting recipes, listed in the `Recipes` Section
+- `/give @s scythes:(name)`
+- `/polymer creative` > Combat
+
 # Balancing
 
 Scythes are balanced to have less attack speed and damage than an axe, but having slightly more damage than a sword; and having higher reach for both
