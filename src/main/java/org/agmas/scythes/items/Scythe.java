@@ -10,6 +10,8 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -64,6 +66,7 @@ public class Scythe extends ToolItem implements PolymerItem {
                         spe.setVelocity(spe.getRotationVector().multiply(1.3).x,spe.getRotationVector().multiply(0.9).y,spe.getRotationVector().multiply(1.3).z);
                         spe.velocityDirty = true;
                         spe.velocityModified = true;
+                        stack.damage(1, spe, EquipmentSlot.MAINHAND);
                         spe.setFrozenTicks(10);
                         abilities.flying = false;
                         spe.networkHandler.sendPacket(new PlayerAbilitiesS2CPacket(abilities));
@@ -124,6 +127,9 @@ public class Scythe extends ToolItem implements PolymerItem {
         return itemStack1;
     }
 
+    public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.damage(1, attacker, EquipmentSlot.MAINHAND);
+    }
     @Override
     public Item getPolymerItem(ItemStack itemStack, @Nullable ServerPlayerEntity player) {
         try {
