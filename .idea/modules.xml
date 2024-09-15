@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Scythes.client.iml" filepath="$PROJECT_DIR$/.idea/modules/Scythes.client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Scythes.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Scythes.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Scythes.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Scythes.test.iml" />
+    </modules>
+  </component>
+</project>

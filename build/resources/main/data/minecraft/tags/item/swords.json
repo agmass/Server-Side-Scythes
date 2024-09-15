@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "scythes:cloud_scythe",
+    "scythes:iron_scythe",
+    "scythes:diamond_scythe",
+    "scythes:netherite_scythe",
+    "scythes:golden_scythe",
+    "scythes:stone_scythe",
+    "scythes:wooden_scythe"
+  ]
+}
