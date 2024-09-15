@@ -127,9 +127,12 @@ public class Scythe extends ToolItem implements PolymerItem {
         return itemStack1;
     }
 
-    public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    @Override
+    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         stack.damage(1, attacker, EquipmentSlot.MAINHAND);
+        return super.postHit(stack, target, attacker);
     }
+
     @Override
     public Item getPolymerItem(ItemStack itemStack, @Nullable ServerPlayerEntity player) {
         try {

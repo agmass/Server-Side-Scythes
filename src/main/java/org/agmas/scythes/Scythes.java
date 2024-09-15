@@ -16,13 +16,13 @@ public class Scythes implements ModInitializer {
     public void onInitialize() {
         ScythesItems.initalize();
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register((a)->{
-            a.add(ScythesItems.CLOUD_SCYTHE);
-            a.add(ScythesItems.DIAMOND_SCYTHE);
-            a.add(ScythesItems.IRON_SCYTHE);
-            a.add(ScythesItems.NETHERITE_SCYTHE);
-            a.add(ScythesItems.GOLDEN_SCYTHE);
             a.add(ScythesItems.WOODEN_SCYTHE);
             a.add(ScythesItems.STONE_SCYTHE);
+            a.add(ScythesItems.IRON_SCYTHE);
+            a.add(ScythesItems.CLOUD_SCYTHE);
+            a.add(ScythesItems.GOLDEN_SCYTHE);
+            a.add(ScythesItems.DIAMOND_SCYTHE);
+            a.add(ScythesItems.NETHERITE_SCYTHE);
         });
         PolymerResourcePackUtils.addModAssets("scythes");
     }
