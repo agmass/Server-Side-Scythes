@@ -42,6 +42,12 @@ public class Scythe extends ToolItem implements PolymerItem {
         this.item = item;
         toolMaterial = material;
     }
+    public Scythe(Settings settings, ToolMaterial material, String modelName, Item item, String modelNamespace) {
+        super(material, settings);
+        modelData = PolymerResourcePackUtils.requestModel(item, Identifier.of(modelNamespace, "item/"+modelName));
+        this.item = item;
+        toolMaterial = material;
+    }
 
     @Override
     public float getBonusAttackDamage(Entity target, float baseAttackDamage, DamageSource damageSource) {
