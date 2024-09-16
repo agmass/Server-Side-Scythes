@@ -33,9 +33,13 @@ import org.jetbrains.annotations.Nullable;
 public class Scythe extends ToolItem implements PolymerItem {
 
     ToolMaterial toolMaterial;
+    PolymerModelData modelData;
+    Item item;
 
-    public Scythe(Settings settings, ToolMaterial material) {
+    public Scythe(Settings settings, ToolMaterial material, String modelName, Item item) {
         super(material, settings);
+        modelData = PolymerResourcePackUtils.requestModel(item, Identifier.of("scythes", "item/"+modelName));
+        this.item = item;
         toolMaterial = material;
     }
 
@@ -102,27 +106,6 @@ public class Scythe extends ToolItem implements PolymerItem {
     @Override
     public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, RegistryWrapper.WrapperLookup lookup, @Nullable ServerPlayerEntity player) {
         var itemStack1 = PolymerItem.super.getPolymerItemStack(itemStack, tooltipType, lookup, player);
-        PolymerModelData modelData = PolymerResourcePackUtils.requestModel(itemStack1.getItem(), Identifier.of("scythes", "item/cloud_scythe"));
-        if (itemStack.getItem() instanceof Scythe s) {
-            if (s.toolMaterial == ToolMaterials.IRON) {
-                modelData = PolymerResourcePackUtils.requestModel(itemStack1.getItem(), Identifier.of("scythes", "item/iron_scythe"));
-            }
-            if (s.toolMaterial == ToolMaterials.DIAMOND) {
-                modelData = PolymerResourcePackUtils.requestModel(itemStack1.getItem(), Identifier.of("scythes", "item/diamond_scythe"));
-            }
-            if (s.toolMaterial == ToolMaterials.NETHERITE) {
-                modelData = PolymerResourcePackUtils.requestModel(itemStack1.getItem(), Identifier.of("scythes", "item/netherite_scythe"));
-            }
-            if (s.toolMaterial == ToolMaterials.STONE) {
-                modelData = PolymerResourcePackUtils.requestModel(itemStack1.getItem(), Identifier.of("scythes", "item/stone_scythe"));
-            }
-            if (s.toolMaterial == ToolMaterials.WOOD) {
-                modelData = PolymerResourcePackUtils.requestModel(itemStack1.getItem(), Identifier.of("scythes", "item/wooden_scythe"));
-            }
-            if (s.toolMaterial == ToolMaterials.GOLD) {
-                modelData = PolymerResourcePackUtils.requestModel(itemStack1.getItem(), Identifier.of("scythes", "item/golden_scythe"));
-            }
-        }
         itemStack1.set(DataComponentTypes.CUSTOM_MODEL_DATA, modelData.asComponent());
         return itemStack1;
     }
@@ -135,43 +118,6 @@ public class Scythe extends ToolItem implements PolymerItem {
 
     @Override
     public Item getPolymerItem(ItemStack itemStack, @Nullable ServerPlayerEntity player) {
-        try {
-            if (itemStack.getItem() instanceof Scythe s) {
-                if (s.toolMaterial.equals(CloudMaterial.INSTANCE)) {
-                    return Items.IRON_HOE.asItem();
-                }
-
-                /*
-
-                "oh why don't you use a switch statement here"
-                IDK I TRIED TO AND IT FOR SOME REASOn CAUSED TEN BILLION ERRORS IMS ORRYY
-
-                 */
-
-                if (s.toolMaterial == ToolMaterials.IRON) {
-                    return Items.IRON_HOE.asItem();
-                }
-                if (s.toolMaterial == ToolMaterials.DIAMOND) {
-                    return Items.DIAMOND_HOE.asItem();
-                }
-                if (s.toolMaterial == ToolMaterials.NETHERITE) {
-                    return Items.NETHERITE_HOE.asItem();
-                }
-                if (s.toolMaterial == ToolMaterials.STONE) {
-                    return Items.STONE_HOE.asItem();
-                }
-                if (s.toolMaterial == ToolMaterials.WOOD) {
-                    return Items.WOODEN_HOE.asItem();
-                }
-                if (s.toolMaterial == ToolMaterials.GOLD) {
-                    return Items.GOLDEN_HOE.asItem();
-                }
-                return Items.BEDROCK.asItem();
-            } else {
-                return Items.WOODEN_SWORD.asItem();
-            }
-        } catch (Exception e) {
-            return Items.DEEPSLATE.asItem();
-        }
+        return item;
     }
 }
