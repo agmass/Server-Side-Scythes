@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "scythes:cloud_scythe",
+      "scythes:wooden_scythe",
+      "scythes:stone_scythe",
+      "scythes:iron_scythe",
+      "scythes:golden_scythe",
+      "scythes:diamond_scythe",
+      "scythes:netherite_scythe"
+    ]
+  },
+  "criteria": {
+    "has_stick": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{
+          "item": "minecraft:stick"
+        }]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_stick"
+    ]
+  ]
+}
