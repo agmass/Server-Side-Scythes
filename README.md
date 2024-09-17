@@ -1,5 +1,7 @@
 # Scythes
 
+***This mod works completely on the server-side, meaning clients do not (and should not need to) install this into their modpacks!***
+
 Adds in Scythes, a new weapon that increases attack reach by 2.6m instead of attack damage or speed.
 
 **Also adds in the Cloud Scythe made of calcite**, a new type of scythe that gives the player holding it a Double Jump until they touch the ground.
