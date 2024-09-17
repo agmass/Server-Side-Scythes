@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class Scythe extends ToolItem implements PolymerItem {
 
-    ToolMaterial toolMaterial;
+    public ToolMaterial toolMaterial;
     PolymerModelData modelData;
     Item item;
 
@@ -89,19 +89,6 @@ public class Scythe extends ToolItem implements PolymerItem {
                         Scythes.canDoubleJump.put(spe.getUuid(), true);
                         abilities.allowFlying = true;
                         spe.networkHandler.sendPacket(new PlayerAbilitiesS2CPacket(abilities));
-                    }
-                } else {
-                    if (spe.getAbilities().allowFlying && spe.interactionManager.getGameMode().isSurvivalLike()) {
-                        boolean skip = false;
-                        if (spe.getInventory().getMainHandStack().getItem() instanceof Scythe s) {
-                            if (s.toolMaterial.equals(CloudMaterial.INSTANCE)) {
-                                skip = true;
-                            }
-                        }
-                        if (!skip) {
-                            spe.interactionManager.getGameMode().setAbilities(abilities);
-                            spe.networkHandler.sendPacket(new PlayerAbilitiesS2CPacket(abilities));
-                        }
                     }
                 }
             }
