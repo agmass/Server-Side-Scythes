@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:iron_hoe "
+    },
+    "title": {
+      "text": "To the skies!"
+    },
+    "description": {
+      "text": "Obtain a cloud scythe."
+    }
+  },
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "diamond": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "player": {},
+        "items": [
+          {
+            "items": [
+              "scythes:cloud_scythe"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "diamond"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
