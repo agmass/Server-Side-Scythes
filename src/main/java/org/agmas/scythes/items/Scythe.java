@@ -3,6 +3,7 @@ package org.agmas.scythes.items;
 import eu.pb4.polymer.common.api.PolymerCommonUtils;
 import eu.pb4.polymer.core.api.item.PolymerItem;
 import eu.pb4.polymer.core.api.utils.PolymerUtils;
+import eu.pb4.polymer.networking.api.server.PolymerServerNetworking;
 import eu.pb4.polymer.resourcepack.api.PolymerModelData;
 import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.minecraft.block.Block;
@@ -18,6 +19,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.nbt.NbtInt;
 import net.minecraft.network.packet.s2c.play.PlayerAbilitiesS2CPacket;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.RegistryWrapper;
@@ -73,7 +75,7 @@ public class Scythe extends ToolItem implements PolymerItem {
                 if (selected) {
                     if (abilities.flying) {
                         Scythes.canDoubleJump.put(spe.getUuid(), false);
-                        spe.setVelocity(spe.getRotationVector().multiply(1.3).x,spe.getRotationVector().multiply(0.9).y,spe.getRotationVector().multiply(1.3).z);
+                        spe.setVelocity(spe.getRotationVector().multiply(1.2).x,spe.getRotationVector().multiply(1.2).y,spe.getRotationVector().multiply(1.2).z);
                         spe.velocityDirty = true;
                         spe.velocityModified = true;
                         stack.damage(1, spe, EquipmentSlot.MAINHAND);
@@ -111,6 +113,10 @@ public class Scythe extends ToolItem implements PolymerItem {
 
     @Override
     public Item getPolymerItem(ItemStack itemStack, @Nullable ServerPlayerEntity player) {
-        return item;
+        if (PolymerServerNetworking.getMetadata(player.networkHandler, Scythes.REGISTER_PACKET, NbtInt.TYPE) == NbtInt.of(1)) {
+            return this;
+        } else {
+            return item;
+        }
     }
 }

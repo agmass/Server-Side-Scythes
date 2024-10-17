@@ -10,19 +10,12 @@
   "icon": "assets/scythes/icon.png",
   "environment": "*",
   "entrypoints": {
-    "client": [
-      "org.agmas.scythes.client.ScythesClient"
-    ],
     "main": [
       "org.agmas.scythes.Scythes"
     ]
   },
   "mixins": [
-    "scythes.mixins.json",
-    {
-      "config": "scythes.client.mixins.json",
-      "environment": "client"
-    }
+    "scythes.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
