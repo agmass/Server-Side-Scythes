@@ -12,6 +12,9 @@
   "entrypoints": {
     "main": [
       "org.agmas.scythes.Scythes"
+    ],
+    "client": [
+      "org.agmas.scythes.ScythesClient"
     ]
   },
   "mixins": [

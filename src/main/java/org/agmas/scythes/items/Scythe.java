@@ -113,6 +113,7 @@ public class Scythe extends ToolItem implements PolymerItem {
 
     @Override
     public Item getPolymerItem(ItemStack itemStack, @Nullable ServerPlayerEntity player) {
+        if (player == null) return item;
         if (PolymerServerNetworking.getMetadata(player.networkHandler, Scythes.REGISTER_PACKET, NbtInt.TYPE) == NbtInt.of(1)) {
             return this;
         } else {

@@ -2,7 +2,6 @@ package org.agmas.scythes;
 
 import com.mojang.serialization.Codec;
 import eu.pb4.polymer.networking.api.PolymerNetworking;
-import eu.pb4.polymer.networking.api.client.PolymerClientNetworking;
 import eu.pb4.polymer.networking.api.server.PolymerServerNetworking;
 import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.fabricmc.api.ModInitializer;
@@ -30,7 +29,6 @@ public class Scythes implements ModInitializer {
     public void onInitialize() {
         ScythesItems.initalize();
         PolymerServerNetworking.setServerMetadata(REGISTER_PACKET, NbtInt.of(1));
-        PolymerClientNetworking.setClientMetadata(REGISTER_PACKET, NbtInt.of(1));
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register((a)->{
             a.add(ScythesItems.WOODEN_SCYTHE);
             a.add(ScythesItems.STONE_SCYTHE);
