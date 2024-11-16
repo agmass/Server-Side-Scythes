@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    " RW",
+    " R "
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:gunpowder"
+    },
+    "R": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "scythes:gunpowder_scythe",
+    "count": 1
+  }
+}

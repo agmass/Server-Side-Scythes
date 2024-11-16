@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "WRW",
+    "WWW"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:blaze_powder"
+    },
+    "R": {
+      "item": "scythes:golden_scythe"
+    }
+  },
+  "result": {
+    "id": "scythes:growth_scythe",
+    "count": 1
+  }
+}

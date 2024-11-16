@@ -4,10 +4,8 @@
 
 Adds in Scythes, a new weapon that increases attack reach by 2.6m instead of attack damage or speed.
 
-**Also adds in the Cloud Scythe made of calcite**, a new type of scythe that gives the player holding it a Double Jump until they touch the ground.
-
-This mod also allows other mods to make scythes, such as [BleedingEdge](https://github.com/agmass/BleedingEdge)
-
+**Also adds in many, MANY new scythes (after v2.0.0) all with custom abilities to shake up PVP!**
+ 
 ## Resource Pack
 - Install [Polymer](https://modrinth.com/mod/polymer) (you may already have it installed as a dependency)
 - Follow [this guide](https://polymer.pb4.eu/latest/user/resource-pack-hosting/) for up-to-date details on how to host your pack for your specific scenario.
@@ -30,6 +28,9 @@ Bedrock players playing through geyser will not be able to see the custom textur
 
 Bedrock players get 4 extra damage points due to the fact they do not have access to the extra reach attribute java has
 
+Bedrock players do not see effects of the growth scythe and are not able to see the border of the border scythe, however both (should) still work for Java players.
+
 ## Recipes
 ![Crafting Recipe](https://cdn.modrinth.com/data/cached_images/82291a48888473be6a6e7a6282180b81a73ff226.png)
-![Cloud Scythe Recipe](https://cdn.modrinth.com/data/cached_images/9b9866875b6053ef5b8a6fa8eabce531a30a275b.png)
+
+All custom recipes are available in the Recipe Book after grabbing a Stick. You can also install the Polydex mod to view recipes.

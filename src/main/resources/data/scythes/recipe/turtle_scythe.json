@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    " RW",
+    " R "
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:scute"
+    },
+    "R": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "scythes:turtle_scythe",
+    "count": 1
+  }
+}

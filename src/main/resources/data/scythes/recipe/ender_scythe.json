@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EWW",
+    " RW",
+    " R "
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:chorus_fruit"
+    },
+    "R": {
+      "item": "minecraft:iron_ingot"
+    },
+    "E": {
+      "item": "minecraft:chorus_fruit"
+    }
+  },
+  "result": {
+    "id": "scythes:ender_scythe",
+    "count": 1
+  }
+}

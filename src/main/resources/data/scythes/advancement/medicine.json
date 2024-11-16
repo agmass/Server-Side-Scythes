@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "id": "scythes:suspicious_scythe"
+    },
+    "title": "Taste of your own Medicine",
+    "description": "Kill a witch with a Suspicious Scythe."
+  },
+  "parent": "minecraft:adventure/kill_a_mob",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "equipment": {
+                "mainhand": {
+                  "items": "scythes:suspicious_scythe"
+                }
+              }
+            }
+          }
+        ],
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:witch"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "sends_telemetry_event": false
+}

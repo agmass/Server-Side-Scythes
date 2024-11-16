@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "id": "scythes:cloud_scythe"
+      "id": "scythes:ice_scythe"
     },
     "title": {
-      "text": "To the skies!"
+      "text": "Sc-ice-the"
     },
     "description": {
-      "text": "Obtain a cloud scythe."
+      "text": "Obtain an Ice scythe."
     }
   },
   "parent": "minecraft:adventure/root",
@@ -19,7 +19,7 @@
         "items": [
           {
             "items": [
-              "scythes:cloud_scythe"
+              "scythes:ice_scythe"
             ]
           }
         ]

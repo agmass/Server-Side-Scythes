@@ -3,12 +3,20 @@
   "rewards": {
     "recipes": [
       "scythes:cloud_scythe",
-      "scythes:wooden_scythe",
-      "scythes:stone_scythe",
+      "scythes:turtle_scythe",
+      "scythes:suspicious_scythe",
+      "scythes:golem_scythe",
       "scythes:iron_scythe",
-      "scythes:golden_scythe",
       "scythes:diamond_scythe",
-      "scythes:netherite_scythe"
+      "scythes:netherite_scythe",
+      "scythes:golden_scythe",
+      "scythes:stone_scythe",
+      "scythes:wooden_scythe",
+      "scythes:growth_scythe",
+      "scythes:gunpowder_scythe",
+      "scythes:border_scythe",
+      "scythes:ender_scythe",
+      "scythes:ice_scythe"
     ]
   },
   "criteria": {

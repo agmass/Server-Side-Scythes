@@ -7,8 +7,8 @@ import net.minecraft.item.ToolMaterials;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import org.agmas.scythes.items.Scythe;
-import org.agmas.scythes.materials.CloudMaterial;
+import org.agmas.scythes.items.*;
+import org.agmas.scythes.materials.*;
 
 public class ScythesItems {
 
@@ -37,9 +37,49 @@ public class ScythesItems {
             "stone_scythe"
     );
     public static final Item CLOUD_SCYTHE = register(
-            new Scythe(new Item.Settings().attributeModifiers(Scythe.createAttributeModifiers(CloudMaterial.INSTANCE, 4f, -3.2f)), CloudMaterial.INSTANCE, "cloud_scythe", Items.IRON_HOE),
+            new CloudScythe(new Item.Settings().attributeModifiers(Scythe.createAttributeModifiers(CloudMaterial.INSTANCE, 4f, -3.2f)), CloudMaterial.INSTANCE, "cloud_scythe", Items.IRON_HOE),
             "cloud_scythe"
     );
+    public static final Item TURTLE_SCYTHE = register(
+            new TurtleScythe(new Item.Settings().attributeModifiers(Scythe.createAttributeModifiers(TurtleMaterial.INSTANCE, 4f, -3.2f)), TurtleMaterial.INSTANCE, "turtle_scythe", Items.TIPPED_ARROW),
+            "turtle_scythe"
+    );
+    public static final Item GUNPOWDER_SCYTHE = register(
+            new GunpowderScythe(new Item.Settings().attributeModifiers(Scythe.createAttributeModifiers(GunpowderMaterial.INSTANCE, 4f, -3.2f)), GunpowderMaterial.INSTANCE, "gunpowder_scythe", Items.TIPPED_ARROW),
+            "gunpowder_scythe"
+    );
+    public static final Item SUSPICIOUS_SCYTHE = register(
+            new SuspicousScythe(new Item.Settings().attributeModifiers(Scythe.createAttributeModifiers(SuspiciousMaterial.INSTANCE, 4f, -3.2f)), SuspiciousMaterial.INSTANCE, "suspicious_scythe", Items.TIPPED_ARROW),
+            "suspicious_scythe"
+    );
+    public static final Item GOLEM_SCYTHE = register(
+            new GolemScythe(new Item.Settings().attributeModifiers(Scythe.createAttributeModifiers(GolemMaterial.INSTANCE, 4f, -3.5F)), GolemMaterial.INSTANCE, "golem_scythe", Items.IRON_HOE),
+            "golem_scythe"
+    );
+    public static final Item ICE_SCYTHE = register(
+            new IceScythe(new Item.Settings().attributeModifiers(Scythe.createAttributeModifiers(IceMaterial.INSTANCE, 4f, -3.2F)), IceMaterial.INSTANCE, "golem_scythe", Items.TIPPED_ARROW),
+            "ice_scythe"
+    );
+    public static final Item ENDER_SCYTHE = register(
+            new EnderScythe(new Item.Settings().attributeModifiers(Scythe.createAttributeModifiers(EnderMaterial.INSTANCE, 4f, -3.2F)), EnderMaterial.INSTANCE, "ender_scythe", Items.TIPPED_ARROW),
+            "ender_scythe"
+    );
+    public static final Item BORDER_SCYTHE = register(
+            new BorderScythe(new Item.Settings().attributeModifiers(Scythe.createAttributeModifiers(ToolMaterials.DIAMOND, 4f, -3.2F)), ToolMaterials.DIAMOND, "border_scythe", Items.TIPPED_ARROW),
+            "border_scythe"
+    );
+        public static final Item BAN_SCYTHE = register(
+            new BanScythe(new Item.Settings().attributeModifiers(Scythe.createAttributeModifiers(ToolMaterials.DIAMOND, 4f, -3.2F)), ToolMaterials.DIAMOND, "border_scythe", Items.TIPPED_ARROW),
+            "ban_scythe"
+    );
+    public static final Item GROWTH_SCYTHE = register(
+            new GrowthScythe(new Item.Settings().attributeModifiers(Scythe.createAttributeModifiers(GrowthMaterial.INSTANCE, 4f, -3.2F)), GrowthMaterial.INSTANCE, "growth_scythe", Items.TIPPED_ARROW),
+            "growth_scythe"
+    );
+
+
+
+
 
     public static Item register(Item item, String id) {
         // Create the identifier for the item.
