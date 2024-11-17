@@ -41,6 +41,7 @@ public class BorderRoom {
     }
 
     public void deactivate() {
+        remove = true;
         if (attacker instanceof ServerPlayerEntity spe) {
             WorldBorder worldBorder = spe.getWorld().getWorldBorder();
             spe.networkHandler.sendPacket(new WorldBorderCenterChangedS2CPacket(worldBorder));
@@ -56,14 +57,14 @@ public class BorderRoom {
     public void activate() {
         if (attacker instanceof ServerPlayerEntity spe) {
             WorldBorder worldBorder = new WorldBorder();
-            worldBorder.setCenter(pos.getX(), pos.getZ());
+            worldBorder.setCenter(pos.getX()*spe.getWorld().getDimension().coordinateScale(), pos.getZ()*spe.getWorld().getDimension().coordinateScale());
             worldBorder.setSize(24);
             spe.networkHandler.sendPacket(new WorldBorderCenterChangedS2CPacket(worldBorder));
             spe.networkHandler.sendPacket(new WorldBorderSizeChangedS2CPacket(worldBorder));
         }
         if (victim instanceof ServerPlayerEntity spe) {
             WorldBorder worldBorder = new WorldBorder();
-            worldBorder.setCenter(pos.getX(), pos.getZ());
+            worldBorder.setCenter(pos.getX()*spe.getWorld().getDimension().coordinateScale(), pos.getZ()*spe.getWorld().getDimension().coordinateScale());
             worldBorder.setSize(24);
             spe.networkHandler.sendPacket(new WorldBorderCenterChangedS2CPacket(worldBorder));
             spe.networkHandler.sendPacket(new WorldBorderSizeChangedS2CPacket(worldBorder));
