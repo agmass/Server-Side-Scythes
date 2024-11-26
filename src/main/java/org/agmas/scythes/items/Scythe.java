@@ -2,10 +2,10 @@ package org.agmas.scythes.items;
 
 import eu.pb4.polymer.common.api.PolymerCommonUtils;
 import eu.pb4.polymer.core.api.item.PolymerItem;
+import eu.pb4.polymer.core.api.utils.PolymerClientDecoded;
+import eu.pb4.polymer.core.api.utils.PolymerKeepModel;
 import eu.pb4.polymer.core.api.utils.PolymerUtils;
 import eu.pb4.polymer.networking.api.server.PolymerServerNetworking;
-import eu.pb4.polymer.resourcepack.api.PolymerModelData;
-import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.minecraft.block.Block;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
@@ -32,21 +32,18 @@ import org.agmas.scythes.Scythes;
 import org.agmas.scythes.materials.CloudMaterial;
 import org.jetbrains.annotations.Nullable;
 
-public class Scythe extends ToolItem implements PolymerItem {
+public class Scythe extends ToolItem implements PolymerItem, PolymerKeepModel, PolymerClientDecoded {
 
     public ToolMaterial toolMaterial;
-    PolymerModelData modelData;
     Item item;
 
     public Scythe(Settings settings, ToolMaterial material, String modelName, Item item) {
         super(material, settings);
-        modelData = PolymerResourcePackUtils.requestModel(item, Identifier.of("scythes", "item/"+modelName));
         this.item = item;
         toolMaterial = material;
     }
     public Scythe(Settings settings, ToolMaterial material, String modelName, Item item, String modelNamespace) {
         super(material, settings);
-        modelData = PolymerResourcePackUtils.requestModel(item, Identifier.of(modelNamespace, "item/"+modelName));
         this.item = item;
         toolMaterial = material;
     }
@@ -66,12 +63,6 @@ public class Scythe extends ToolItem implements PolymerItem {
         return AttributeModifiersComponent.builder().add(EntityAttributes.PLAYER_ENTITY_INTERACTION_RANGE, new EntityAttributeModifier(Identifier.of("scythes", "reach"), 2.6, EntityAttributeModifier.Operation.ADD_VALUE), AttributeModifierSlot.MAINHAND).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(BASE_ATTACK_DAMAGE_MODIFIER_ID, (double)(baseAttackDamage + material.getAttackDamage()), EntityAttributeModifier.Operation.ADD_VALUE), AttributeModifierSlot.MAINHAND).add(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(BASE_ATTACK_SPEED_MODIFIER_ID, (double)attackSpeed, EntityAttributeModifier.Operation.ADD_VALUE), AttributeModifierSlot.MAINHAND).build();
     }
 
-    @Override
-    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, RegistryWrapper.WrapperLookup lookup, @Nullable ServerPlayerEntity player) {
-        var itemStack1 = PolymerItem.super.getPolymerItemStack(itemStack, tooltipType, lookup, player);
-        itemStack1.set(DataComponentTypes.CUSTOM_MODEL_DATA, modelData.asComponent());
-        return itemStack1;
-    }
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
@@ -79,10 +70,12 @@ public class Scythe extends ToolItem implements PolymerItem {
         return super.postHit(stack, target, attacker);
     }
 
+
+
     @Override
     public Item getPolymerItem(ItemStack itemStack, @Nullable ServerPlayerEntity player) {
         if (player == null) return item;
-        if (PolymerServerNetworking.getMetadata(player.networkHandler, Scythes.REGISTER_PACKET, NbtInt.TYPE) == NbtInt.of(1)) {
+        if (PolymerServerNetworking.getMetadata(player.networkHandler, Scythes.REGISTER_PACKET, NbtInt.TYPE) != null) {
             return this;
         } else {
             return item;

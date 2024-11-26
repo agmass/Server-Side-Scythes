@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import eu.pb4.polymer.networking.api.PolymerNetworking;
 import eu.pb4.polymer.networking.api.server.PolymerServerNetworking;
 import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
+import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
@@ -32,6 +33,7 @@ public class Scythes implements ModInitializer {
     public void onInitialize() {
         ScythesItems.initalize();
         PolymerServerNetworking.setServerMetadata(REGISTER_PACKET, NbtInt.of(1));
+        PolymerResourcePackUtils.addModAssets("scythes");
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register((a)->{
             a.add(ScythesItems.WOODEN_SCYTHE);
             a.add(ScythesItems.STONE_SCYTHE);
@@ -86,6 +88,6 @@ public class Scythes implements ModInitializer {
                 }
             });
         });
-        PolymerResourcePackUtils.addModAssets("scythes");
     }
+
 }
