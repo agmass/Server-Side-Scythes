@@ -6,6 +6,8 @@ import eu.pb4.polymer.core.api.utils.PolymerClientDecoded;
 import eu.pb4.polymer.core.api.utils.PolymerKeepModel;
 import eu.pb4.polymer.core.api.utils.PolymerUtils;
 import eu.pb4.polymer.networking.api.server.PolymerServerNetworking;
+import eu.pb4.polymer.resourcepack.api.PolymerModelData;
+import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.minecraft.block.Block;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
@@ -36,14 +38,17 @@ public class Scythe extends ToolItem implements PolymerItem, PolymerKeepModel, P
 
     public ToolMaterial toolMaterial;
     Item item;
+    PolymerModelData modelData;
 
     public Scythe(Settings settings, ToolMaterial material, String modelName, Item item) {
         super(material, settings);
         this.item = item;
+        modelData = PolymerResourcePackUtils.requestModel(item, Identifier.of("scythes", "item/"+modelName));
         toolMaterial = material;
     }
     public Scythe(Settings settings, ToolMaterial material, String modelName, Item item, String modelNamespace) {
         super(material, settings);
+        modelData = PolymerResourcePackUtils.requestModel(item, Identifier.of(modelNamespace, "item/"+modelName));
         this.item = item;
         toolMaterial = material;
     }
@@ -70,7 +75,12 @@ public class Scythe extends ToolItem implements PolymerItem, PolymerKeepModel, P
         return super.postHit(stack, target, attacker);
     }
 
-
+    @Override
+    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, RegistryWrapper.WrapperLookup lookup, @Nullable ServerPlayerEntity player) {
+        var itemStack1 = PolymerItem.super.getPolymerItemStack(itemStack, tooltipType, lookup, player);
+        itemStack1.set(DataComponentTypes.CUSTOM_MODEL_DATA, modelData.asComponent());
+        return itemStack1;
+    }
 
     @Override
     public Item getPolymerItem(ItemStack itemStack, @Nullable ServerPlayerEntity player) {
