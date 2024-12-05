@@ -49,6 +49,7 @@ public class Scythe extends ToolItem implements PolymerItem, PolymerKeepModel, P
     public Scythe(Settings settings, ToolMaterial material, String modelName, Item item, String modelNamespace) {
         super(material, settings);
         modelData = PolymerResourcePackUtils.requestModel(item, Identifier.of(modelNamespace, "item/"+modelName));
+
         this.item = item;
         toolMaterial = material;
     }
