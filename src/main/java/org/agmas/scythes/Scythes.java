@@ -1,8 +1,7 @@
 package org.agmas.scythes;
 
 import com.mojang.serialization.Codec;
-import eu.pb4.polymer.networking.api.PolymerNetworking;
-import eu.pb4.polymer.networking.api.server.PolymerServerNetworking;
+import eu.pb4.polymer.networking.api.PolymerServerNetworking;
 import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.api.ModInitializer;

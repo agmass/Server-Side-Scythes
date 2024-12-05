@@ -7,14 +7,14 @@
   ],
   "key": {
     "W": {
-      "item": "minecraft:gunpowder"
+      "item": "minecraft:turtle_scute"
     },
     "R": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "id": "scythes:gunpowder_scythe",
+    "item": "scythes:turtle_scythe",
     "count": 1
   }
 }

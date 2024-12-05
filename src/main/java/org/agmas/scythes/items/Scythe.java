@@ -1,26 +1,27 @@
 package org.agmas.scythes.items;
 
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
+import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import eu.pb4.polymer.common.api.PolymerCommonUtils;
 import eu.pb4.polymer.core.api.item.PolymerItem;
 import eu.pb4.polymer.core.api.utils.PolymerClientDecoded;
 import eu.pb4.polymer.core.api.utils.PolymerKeepModel;
 import eu.pb4.polymer.core.api.utils.PolymerUtils;
-import eu.pb4.polymer.networking.api.server.PolymerServerNetworking;
+import eu.pb4.polymer.networking.api.PolymerServerNetworking;
 import eu.pb4.polymer.resourcepack.api.PolymerModelData;
 import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.minecraft.block.Block;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.AttributeModifierSlot;
-import net.minecraft.component.type.AttributeModifiersComponent;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.item.*;
-import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.nbt.NbtInt;
 import net.minecraft.network.packet.s2c.play.PlayerAbilitiesS2CPacket;
 import net.minecraft.recipe.Ingredient;
@@ -39,48 +40,40 @@ public class Scythe extends ToolItem implements PolymerItem, PolymerKeepModel, P
     public ToolMaterial toolMaterial;
     Item item;
     PolymerModelData modelData;
+    private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
-    public Scythe(Settings settings, ToolMaterial material, String modelName, Item item) {
+    public Scythe(Settings settings, ToolMaterial material, String modelName, Item item, float bonusDamage) {
         super(material, settings);
         this.item = item;
         modelData = PolymerResourcePackUtils.requestModel(item, Identifier.of("scythes", "item/"+modelName));
         toolMaterial = material;
+        ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
+        builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", (double)4f+toolMaterial.getAttackDamage(), EntityAttributeModifier.Operation.ADDITION));
+        builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", (double)-3.2f, EntityAttributeModifier.Operation.ADDITION));
+        builder.put(ReachEntityAttributes.REACH, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", (double)2.6f, EntityAttributeModifier.Operation.ADDITION));
+        this.attributeModifiers = builder.build();
     }
-    public Scythe(Settings settings, ToolMaterial material, String modelName, Item item, String modelNamespace) {
-        super(material, settings);
-        modelData = PolymerResourcePackUtils.requestModel(item, Identifier.of(modelNamespace, "item/"+modelName));
-
-        this.item = item;
-        toolMaterial = material;
-    }
-
     @Override
-    public float getBonusAttackDamage(Entity target, float baseAttackDamage, DamageSource damageSource) {
-        if (damageSource.getAttacker() instanceof ServerPlayerEntity spe) {
-            if (PolymerCommonUtils.isBedrockPlayer(spe)) {
-                spe.sendMessage(Text.of("You can't use the reach modifier on bedrock, so you dealt +4 extra attack damage."), true);
-                return super.getBonusAttackDamage(target, baseAttackDamage+4, damageSource);
-            }
-        }
-        return super.getBonusAttackDamage(target, baseAttackDamage, damageSource);
+    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
+        return attributeModifiers;
     }
 
-    public static AttributeModifiersComponent createAttributeModifiers(ToolMaterial material, float baseAttackDamage, float attackSpeed) {
-        return AttributeModifiersComponent.builder().add(EntityAttributes.PLAYER_ENTITY_INTERACTION_RANGE, new EntityAttributeModifier(Identifier.of("scythes", "reach"), 2.6, EntityAttributeModifier.Operation.ADD_VALUE), AttributeModifierSlot.MAINHAND).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(BASE_ATTACK_DAMAGE_MODIFIER_ID, (double)(baseAttackDamage + material.getAttackDamage()), EntityAttributeModifier.Operation.ADD_VALUE), AttributeModifierSlot.MAINHAND).add(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(BASE_ATTACK_SPEED_MODIFIER_ID, (double)attackSpeed, EntityAttributeModifier.Operation.ADD_VALUE), AttributeModifierSlot.MAINHAND).build();
-    }
 
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        stack.damage(1, attacker, EquipmentSlot.MAINHAND);
+        stack.damage(1, attacker, (e) -> {
+            e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND);
+        });
         return super.postHit(stack, target, attacker);
     }
 
+
     @Override
-    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, RegistryWrapper.WrapperLookup lookup, @Nullable ServerPlayerEntity player) {
-        var itemStack1 = PolymerItem.super.getPolymerItemStack(itemStack, tooltipType, lookup, player);
-        itemStack1.set(DataComponentTypes.CUSTOM_MODEL_DATA, modelData.asComponent());
-        return itemStack1;
+    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipContext context, @Nullable ServerPlayerEntity player) {
+        var itemStack1 = PolymerItem.super.getPolymerItemStack(itemStack,context,player);
+        itemStack1.getNbt().putInt("customModelData", modelData.value());
+        return PolymerItem.super.getPolymerItemStack(itemStack, context, player);
     }
 
     @Override

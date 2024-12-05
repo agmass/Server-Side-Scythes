@@ -7,14 +7,14 @@
   ],
   "key": {
     "W": {
-      "item": "minecraft:diamond"
+      "tag": "minecraft:planks"
     },
     "R": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "id": "scythes:diamond_scythe",
+    "item": "scythes:wooden_scythe",
     "count": 1
   }
 }

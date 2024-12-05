@@ -28,6 +28,15 @@ repositories {
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
     maven { url 'https://maven.nucleoid.xyz' } // You should have it.
+    maven {
+        url = "https://jitpack.io"
+    }
+    maven {
+        url "https://maven.jamieswhiteshirt.com/libs-release"
+        content {
+            includeGroup "com.jamieswhiteshirt"
+        }
+    }
 }
 
 dependencies {
@@ -38,9 +47,13 @@ dependencies {
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation include("eu.pb4:polymer-core:0.9.18+1.21.1")
-    modImplementation include("eu.pb4:polymer-resource-pack:0.9.18+1.21.1")
-    modImplementation include("xyz.nucleoid:server-translations-api:2.3.1+1.21-pre2")
+    modImplementation include("eu.pb4:polymer-core:0.5.16+1.20.1")
+    modImplementation include("eu.pb4:polymer-resource-pack:0.5.16+1.20.1")
+    modImplementation include("xyz.nucleoid:server-translations-api:2.0.0+1.20")
+    include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:2.4.0")
+    modApi("com.github.Virtuoel:Pehkui:${pehkui_version}", {
+        exclude group: "net.fabricmc.fabric-api"
+    })
 }
 
 processResources {

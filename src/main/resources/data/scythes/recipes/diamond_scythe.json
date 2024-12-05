@@ -7,14 +7,14 @@
   ],
   "key": {
     "W": {
-      "item": "minecraft:ice"
+      "item": "minecraft:diamond"
     },
     "R": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "id": "scythes:ice_scythe",
+    "item": "scythes:diamond_scythe",
     "count": 1
   }
 }

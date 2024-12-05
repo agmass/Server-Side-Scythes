@@ -24,8 +24,8 @@ public class SuspiciousMaterial implements ToolMaterial {
     }
 
     @Override
-    public TagKey<Block> getInverseTag() {
-        return null;
+    public int getMiningLevel() {
+        return 0;
     }
 
     @Override
@@ -36,6 +36,6 @@ public class SuspiciousMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(Items.TURTLE_SCUTE.asItem());
+        return Ingredient.ofItems(Items.BOWL.asItem());
     }
 }

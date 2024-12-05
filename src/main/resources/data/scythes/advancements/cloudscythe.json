@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "id": "scythes:cloud_scythe"
+      "item": "scythes:cloud_scythe"
     },
     "title": {
       "text": "To the skies!"

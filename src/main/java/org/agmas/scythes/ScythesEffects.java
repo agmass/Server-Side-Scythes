@@ -17,7 +17,7 @@ public class ScythesEffects implements PolymerStatusEffect
     public static final StatusEffect GROW;
 
     static {
-        GROW = Registry.register(Registries.STATUS_EFFECT, Identifier.of("scythes", "grow"), (new GrowEffect(StatusEffectCategory.HARMFUL, Colors.RED).addAttributeModifier(EntityAttributes.GENERIC_SCALE, Identifier.ofVanilla("effect.grow"), 0.75, EntityAttributeModifier.Operation.ADD_VALUE)));
+        GROW = Registry.register(Registries.STATUS_EFFECT, Identifier.of("scythes", "grow"), (new GrowEffect(StatusEffectCategory.HARMFUL, Colors.RED)));
     }
 
     public static void init() {}

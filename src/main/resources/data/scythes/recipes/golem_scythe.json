@@ -7,14 +7,14 @@
   ],
   "key": {
     "W": {
-      "item": "minecraft:iron_ingot"
+      "item": "minecraft:iron_block"
     },
     "R": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "id": "scythes:iron_scythe",
+    "item": "scythes:golem_scythe",
     "count": 1
   }
 }

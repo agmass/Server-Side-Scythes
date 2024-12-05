@@ -24,8 +24,8 @@ public class EnderMaterial implements ToolMaterial {
     }
 
     @Override
-    public TagKey<Block> getInverseTag() {
-        return null;
+    public int getMiningLevel() {
+        return 0;
     }
 
     @Override

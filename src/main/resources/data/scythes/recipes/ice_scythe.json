@@ -7,14 +7,14 @@
   ],
   "key": {
     "W": {
-      "item": "minecraft:turtle_scute"
+      "item": "minecraft:ice"
     },
     "R": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "id": "scythes:turtle_scythe",
+    "item": "scythes:ice_scythe",
     "count": 1
   }
 }

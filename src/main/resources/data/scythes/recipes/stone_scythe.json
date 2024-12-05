@@ -7,14 +7,14 @@
   ],
   "key": {
     "W": {
-      "item": "minecraft:calcite"
+      "tag": "minecraft:stone_tool_materials"
     },
     "R": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "id": "scythes:cloud_scythe",
+    "item": "scythes:stone_scythe",
     "count": 1
   }
 }

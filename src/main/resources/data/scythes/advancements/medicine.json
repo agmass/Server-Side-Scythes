@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "id": "scythes:suspicious_scythe"
+      "item": "scythes:suspicious_scythe"
     },
     "title": "Taste of your own Medicine",
     "description": "Kill a witch with a Suspicious Scythe."
@@ -18,7 +18,7 @@
             "predicate": {
               "equipment": {
                 "mainhand": {
-                  "items": "scythes:suspicious_scythe"
+                  "items": ["scythes:suspicious_scythe"]
                 }
               }
             }

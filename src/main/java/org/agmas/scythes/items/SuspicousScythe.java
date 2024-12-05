@@ -1,8 +1,6 @@
 package org.agmas.scythes.items;
 
 import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -11,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.potion.Potions;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -23,7 +20,7 @@ import java.util.Random;
 public class SuspicousScythe extends Scythe {
 
     public SuspicousScythe(Settings settings, ToolMaterial material, String modelName, Item item) {
-        super(settings,material,modelName,item);
+        super(settings,material,modelName,item,0);
     }
 
     @Override
@@ -41,7 +38,6 @@ public class SuspicousScythe extends Scythe {
                         new StatusEffectInstance(StatusEffects.NAUSEA, 20*5, 0),
                         new StatusEffectInstance(StatusEffects.SLOWNESS, 20*5, 0),
                         new StatusEffectInstance(StatusEffects.POISON, 20*5, 0),
-                        new StatusEffectInstance(StatusEffects.WIND_CHARGED, 20*5, 0),
                         new StatusEffectInstance(StatusEffects.GLOWING, 20*5, 0),
                 }[new Random().nextInt(0,7)]);
             }
@@ -49,16 +45,5 @@ public class SuspicousScythe extends Scythe {
         return super.postHit(stack, target, attacker);
     }
 
-
-    @Override
-    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, RegistryWrapper.WrapperLookup lookup, @Nullable ServerPlayerEntity player) {
-        var itemStack1 = super.getPolymerItemStack(itemStack, tooltipType, lookup, player);
-        if (player != null) {
-            if (itemStack1.getItem().equals(Items.TIPPED_ARROW) && PolymerResourcePackUtils.hasPack(player, player.getUuid())) {
-                itemStack1.set(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Potions.POISON));
-            }
-        }
-        return itemStack1;
-    }
 
 }

@@ -1,23 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "EWW",
+    "WWW",
     " RW",
     " R "
   ],
   "key": {
     "W": {
-      "item": "minecraft:chorus_fruit"
-    },
-    "R": {
       "item": "minecraft:iron_ingot"
     },
-    "E": {
-      "item": "minecraft:chorus_fruit"
+    "R": {
+      "item": "minecraft:stick"
     }
   },
   "result": {
-    "id": "scythes:ender_scythe",
+    "item": "scythes:iron_scythe",
     "count": 1
   }
 }

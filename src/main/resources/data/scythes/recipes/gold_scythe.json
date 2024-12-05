@@ -7,14 +7,14 @@
   ],
   "key": {
     "W": {
-      "tag": "minecraft:stone_tool_materials"
+      "item": "minecraft:gold_ingot"
     },
     "R": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "id": "scythes:stone_scythe",
+    "item": "scythes:golden_scythe",
     "count": 1
   }
 }
