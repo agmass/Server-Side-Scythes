@@ -14,6 +14,7 @@ import net.minecraft.item.ItemGroups;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtInt;
 import net.minecraft.network.packet.s2c.play.PlayerAbilitiesS2CPacket;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import org.agmas.scythes.items.Scythe;
 import org.agmas.scythes.materials.CloudMaterial;
@@ -25,7 +26,8 @@ import java.util.UUID;
 
 public class Scythes implements ModInitializer {
 
-    public static HashMap<UUID, Boolean> canDoubleJump = new HashMap<>();
+    public static ArrayList<ServerPlayerEntity> unDoubleJump = new ArrayList<>();
+    public static ArrayList<ServerPlayerEntity> flyingFromScythe = new ArrayList<>();
     public static ArrayList<BorderRoom> borderRooms = new ArrayList<>();
     public static Identifier REGISTER_PACKET = Identifier.of("scythes", "register_packet");
 

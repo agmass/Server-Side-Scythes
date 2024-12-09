@@ -25,25 +25,21 @@ public class CloudScythe extends Scythe {
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (entity instanceof ServerPlayerEntity spe) {
             PlayerAbilities abilities = spe.getAbilities();
-            Scythes.canDoubleJump.putIfAbsent(spe.getUuid(), true);
             if (selected) {
                 if (abilities.flying) {
-                    Scythes.canDoubleJump.put(spe.getUuid(), false);
+                    Scythes.unDoubleJump.add(spe);
                     spe.setVelocity(spe.getRotationVector().multiply(1.2).x,spe.getRotationVector().multiply(1.2).y,spe.getRotationVector().multiply(1.2).z);
                     spe.velocityDirty = true;
                     spe.velocityModified = true;
+
                     stack.damage(1, spe, EquipmentSlot.MAINHAND);
                     spe.setFrozenTicks(10);
                     abilities.flying = false;
                     spe.networkHandler.sendPacket(new PlayerAbilitiesS2CPacket(abilities));
                 }
-                if (abilities.allowFlying && !Scythes.canDoubleJump.get(spe.getUuid())) {
-                    abilities.allowFlying = false;
-                    spe.networkHandler.sendPacket(new PlayerAbilitiesS2CPacket(abilities));
-                }
                 if (spe.isOnGround() && !abilities.allowFlying) {
-                    Scythes.canDoubleJump.put(spe.getUuid(), true);
                     abilities.allowFlying = true;
+                    Scythes.flyingFromScythe.add(spe);
                     spe.networkHandler.sendPacket(new PlayerAbilitiesS2CPacket(abilities));
                 }
             }
