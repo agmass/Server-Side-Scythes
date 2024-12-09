@@ -13,6 +13,7 @@ import net.minecraft.item.ItemGroups;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtInt;
 import net.minecraft.network.packet.s2c.play.PlayerAbilitiesS2CPacket;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import org.agmas.scythes.items.Scythe;
 import org.agmas.scythes.materials.CloudMaterial;
@@ -24,7 +25,8 @@ import java.util.UUID;
 
 public class Scythes implements ModInitializer {
 
-    public static HashMap<UUID, Boolean> canDoubleJump = new HashMap<>();
+    public static ArrayList<ServerPlayerEntity> unDoubleJump = new ArrayList<>();
+    public static ArrayList<ServerPlayerEntity> flyingFromScythe = new ArrayList<>();
     public static ArrayList<BorderRoom> borderRooms = new ArrayList<>();
     public static Identifier REGISTER_PACKET = Identifier.of("scythes", "register_packet");
 
@@ -58,33 +60,19 @@ public class Scythes implements ModInitializer {
         ServerTickEvents.START_SERVER_TICK.register((s)->{
             borderRooms.forEach(BorderRoom::tick);
             borderRooms.removeIf(b -> b.remove);
-            s.getPlayerManager().getPlayerList().forEach((p)->{
-
-                PlayerAbilities abilities = p.getAbilities();
-                if (!p.getAbilities().allowFlying && !p.interactionManager.getGameMode().isSurvivalLike()) {
-                    boolean skip = false;
-                    if (p.getInventory().getMainHandStack().getItem() instanceof Scythe ss) {
-                        if (ss.toolMaterial.equals(CloudMaterial.INSTANCE)) {
-                            skip = true;
-                        }
-                    }
-                    if (!skip) {
-                        p.interactionManager.getGameMode().setAbilities(abilities);
-                        p.networkHandler.sendPacket(new PlayerAbilitiesS2CPacket(abilities));
-                    }
+            unDoubleJump.forEach((p)->{
+                p.getAbilities().allowFlying = false;
+                p.getAbilities().flying = false;
+                p.sendAbilitiesUpdate();
+            });
+            unDoubleJump.clear();
+            flyingFromScythe.removeIf((p)->{
+                if (!p.isHolding(ScythesItems.CLOUD_SCYTHE)) {
+                    p.getAbilities().allowFlying = false;
+                    p.networkHandler.sendPacket(new PlayerAbilitiesS2CPacket(p.getAbilities()));
+                    return true;
                 }
-                if (p.getAbilities().allowFlying && p.interactionManager.getGameMode().isSurvivalLike()) {
-                    boolean skip = false;
-                    if (p.getInventory().getMainHandStack().getItem() instanceof Scythe ss) {
-                        if (ss.toolMaterial.equals(CloudMaterial.INSTANCE)) {
-                            skip = true;
-                        }
-                    }
-                    if (!skip) {
-                        p.interactionManager.getGameMode().setAbilities(abilities);
-                        p.networkHandler.sendPacket(new PlayerAbilitiesS2CPacket(abilities));
-                    }
-                }
+                return false;
             });
         });
     }
