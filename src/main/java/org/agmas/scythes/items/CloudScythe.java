@@ -25,7 +25,7 @@ public class CloudScythe extends Scythe {
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (entity instanceof ServerPlayerEntity spe) {
             PlayerAbilities abilities = spe.getAbilities();
-            if (selected) {
+            if (spe.getInventory().getMainHandStack().isOf(this)) {
                 if (abilities.flying) {
                     Scythes.unDoubleJump.add(spe);
                     spe.setVelocity(spe.getRotationVector().multiply(1.2).x,spe.getRotationVector().multiply(1.2).y,spe.getRotationVector().multiply(1.2).z);

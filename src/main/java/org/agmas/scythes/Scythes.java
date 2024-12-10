@@ -67,7 +67,7 @@ public class Scythes implements ModInitializer {
             });
             unDoubleJump.clear();
             flyingFromScythe.removeIf((p)->{
-                if (!p.isHolding(ScythesItems.CLOUD_SCYTHE)) {
+                if (!p.getInventory().getMainHandStack().isOf(ScythesItems.CLOUD_SCYTHE)) {
                     p.getAbilities().allowFlying = false;
                     p.networkHandler.sendPacket(new PlayerAbilitiesS2CPacket(p.getAbilities()));
                     return true;
