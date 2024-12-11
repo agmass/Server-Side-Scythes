@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -41,6 +42,7 @@ public class GolemScythe extends Scythe {
                 user.getWorld().playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_IRON_GOLEM_DAMAGE, SoundCategory.PLAYERS, 1f, 1f);
                 spe.velocityDirty = true;
                 spe.velocityModified = true;
+
             }
         }
         return super.use(world, user, hand);
@@ -60,6 +62,9 @@ public class GolemScythe extends Scythe {
                 target.setVelocity(0, 1,0);
                 target.getWorld().playSound(null, target.getX(), target.getY(), target.getZ(), SoundEvents.ENTITY_IRON_GOLEM_DAMAGE, SoundCategory.PLAYERS, 1f, 1f);
                 target.velocityDirty = true;
+                if (target instanceof ServerPlayerEntity serverPlayerEntity) {
+                    serverPlayerEntity.networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(serverPlayerEntity));
+                }
             }
         }
         return super.postHit(stack, target, attacker);
