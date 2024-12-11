@@ -26,17 +26,6 @@ public class CloudScythe extends Scythe {
         if (entity instanceof ServerPlayerEntity spe) {
             PlayerAbilities abilities = spe.getAbilities();
             if (spe.getInventory().getMainHandStack().isOf(this)) {
-                if (abilities.flying) {
-                    Scythes.unDoubleJump.add(spe);
-                    spe.setVelocity(spe.getRotationVector().multiply(1.2).x,spe.getRotationVector().multiply(1.2).y,spe.getRotationVector().multiply(1.2).z);
-                    spe.velocityDirty = true;
-                    spe.velocityModified = true;
-
-                    stack.damage(1, spe.getRandom(),spe);
-                    spe.setFrozenTicks(10);
-                    abilities.flying = false;
-                    spe.networkHandler.sendPacket(new PlayerAbilitiesS2CPacket(abilities));
-                }
                 if (spe.isOnGround() && !abilities.allowFlying) {
                     abilities.allowFlying = true;
                     Scythes.flyingFromScythe.add(spe);
