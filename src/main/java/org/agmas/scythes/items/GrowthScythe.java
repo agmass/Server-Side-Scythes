@@ -30,7 +30,7 @@ public class GrowthScythe extends Scythe {
         if (attacker instanceof ServerPlayerEntity spe) {
             if (!spe.getItemCooldownManager().isCoolingDown(this)) {
                 target.addStatusEffect(new StatusEffectInstance(ScythesEffects.GROW, 20*10, 0));
-                spe.getItemCooldownManager().set(this, 20*15);
+                spe.getItemCooldownManager().set(this, 20*30);
             }
         }
         return super.postHit(stack, target, attacker);

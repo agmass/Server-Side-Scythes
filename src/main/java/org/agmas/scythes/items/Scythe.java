@@ -35,7 +35,7 @@ import org.agmas.scythes.Scythes;
 import org.agmas.scythes.materials.CloudMaterial;
 import org.jetbrains.annotations.Nullable;
 
-public class Scythe extends ToolItem implements PolymerItem, PolymerKeepModel, PolymerClientDecoded {
+public class Scythe extends SwordItem implements PolymerItem, PolymerKeepModel, PolymerClientDecoded {
 
     public ToolMaterial toolMaterial;
     Item item;
@@ -43,7 +43,7 @@ public class Scythe extends ToolItem implements PolymerItem, PolymerKeepModel, P
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
     public Scythe(Settings settings, ToolMaterial material, String modelName, Item item, float bonusDamage) {
-        super(material, settings);
+        super(material, 0,0,settings);
         this.item = item;
         modelData = PolymerResourcePackUtils.requestModel(item, Identifier.of("scythes", "item/"+modelName));
         toolMaterial = material;
