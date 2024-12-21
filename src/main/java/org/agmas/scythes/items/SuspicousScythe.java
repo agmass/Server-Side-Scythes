@@ -17,6 +17,7 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import xyz.nucleoid.packettweaker.PacketContext;
 
 import java.util.Random;
 
@@ -34,8 +35,8 @@ public class SuspicousScythe extends Scythe {
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (attacker instanceof ServerPlayerEntity spe) {
-            if (!spe.getItemCooldownManager().isCoolingDown(this)) {
-                spe.getItemCooldownManager().set(this, 20*10);
+            if (!spe.getItemCooldownManager().isCoolingDown(stack)) {
+                spe.getItemCooldownManager().set(stack, 20*10);
                 target.addStatusEffect(new StatusEffectInstance[]{
                         new StatusEffectInstance(StatusEffects.DARKNESS, 20*5, 0),
                         new StatusEffectInstance(StatusEffects.NAUSEA, 20*5, 0),
@@ -51,10 +52,10 @@ public class SuspicousScythe extends Scythe {
 
 
     @Override
-    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, RegistryWrapper.WrapperLookup lookup, @Nullable ServerPlayerEntity player) {
-        var itemStack1 = super.getPolymerItemStack(itemStack, tooltipType, lookup, player);
-        if (player != null) {
-            if (itemStack1.getItem().equals(Items.TIPPED_ARROW) && PolymerResourcePackUtils.hasPack(player, player.getUuid())) {
+    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, PacketContext context) {
+        var itemStack1 = super.getPolymerItemStack(itemStack, tooltipType, context);
+        if (context.getPlayer() != null) {
+            if (itemStack1.getItem().equals(Items.TIPPED_ARROW) && PolymerResourcePackUtils.hasPack(context.getPlayer(), context.getPlayer().getUuid())) {
                 itemStack1.set(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Potions.POISON));
             }
         }

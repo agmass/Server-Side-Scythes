@@ -18,7 +18,6 @@ import net.minecraft.network.packet.s2c.play.PlayerAbilitiesS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import org.agmas.scythes.items.Scythe;
-import org.agmas.scythes.materials.CloudMaterial;
 import org.agmas.scythes.util.BorderRoom;
 
 import java.util.ArrayList;

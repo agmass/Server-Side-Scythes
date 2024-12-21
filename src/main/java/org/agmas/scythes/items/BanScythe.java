@@ -21,6 +21,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import xyz.nucleoid.packettweaker.PacketContext;
 
 public class BanScythe extends Scythe {
 
@@ -36,7 +37,7 @@ public class BanScythe extends Scythe {
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
                 if (target instanceof ServerPlayerEntity vic) {
-                    vic.damage(vic.getDamageSources().mobAttack(attacker), 99999);
+                    vic.damage(vic.getServerWorld() ,vic.getDamageSources().mobAttack(attacker), 99999);
                     vic.getServer().getPlayerManager().getUserBanList().add(new BannedPlayerEntry(vic.getGameProfile()));
                     vic.networkHandler.sendPacket(new DisconnectS2CPacket(Text.translatable("multiplayer.disconnect.banned")));
                 }
@@ -46,10 +47,10 @@ public class BanScythe extends Scythe {
 
 
     @Override
-    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, RegistryWrapper.WrapperLookup lookup, @Nullable ServerPlayerEntity player) {
-        var itemStack1 = super.getPolymerItemStack(itemStack, tooltipType, lookup, player);
-        if (player != null) {
-            if (itemStack1.getItem().equals(Items.TIPPED_ARROW) && PolymerResourcePackUtils.hasPack(player, player.getUuid())) {
+    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, PacketContext context) {
+        var itemStack1 = super.getPolymerItemStack(itemStack, tooltipType, context);
+        if (context.getPlayer() != null) {
+            if (itemStack1.getItem().equals(Items.TIPPED_ARROW) && PolymerResourcePackUtils.hasPack(context.getPlayer(), context.getPlayer().getUuid())) {
                 itemStack1.set(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Potions.HEALING));
             }
         }

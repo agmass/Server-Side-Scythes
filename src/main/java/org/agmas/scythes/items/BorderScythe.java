@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 import org.agmas.scythes.Scythes;
 import org.agmas.scythes.util.BorderRoom;
 import org.jetbrains.annotations.Nullable;
+import xyz.nucleoid.packettweaker.PacketContext;
 
 import java.util.Random;
 
@@ -52,10 +53,10 @@ public class BorderScythe extends Scythe {
 
 
     @Override
-    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, RegistryWrapper.WrapperLookup lookup, @Nullable ServerPlayerEntity player) {
-        var itemStack1 = super.getPolymerItemStack(itemStack, tooltipType, lookup, player);
-        if (player != null) {
-            if (itemStack1.getItem().equals(Items.TIPPED_ARROW) && PolymerResourcePackUtils.hasPack(player, player.getUuid())) {
+    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, PacketContext context) {
+        var itemStack1 = super.getPolymerItemStack(itemStack, tooltipType, context);
+        if (context.getPlayer() != null) {
+            if (itemStack1.getItem().equals(Items.TIPPED_ARROW) && PolymerResourcePackUtils.hasPack(context.getPlayer(), context.getPlayer().getUuid())) {
                 itemStack1.set(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Potions.MUNDANE));
             }
         }

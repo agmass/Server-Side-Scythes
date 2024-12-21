@@ -18,6 +18,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
+import xyz.nucleoid.packettweaker.PacketContext;
 
 import java.util.List;
 
@@ -30,8 +31,8 @@ public class EnderScythe extends Scythe {
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (attacker instanceof ServerPlayerEntity spe) {
-            if (!spe.getItemCooldownManager().isCoolingDown(this)) {
-                spe.getItemCooldownManager().set(this, 20*15);
+            if (!spe.getItemCooldownManager().isCoolingDown(stack)) {
+                spe.getItemCooldownManager().set(stack, 20*15);
                 spe.getWorld().playSound(null, target.getX(), target.getY(), target.getZ(), SoundEvents.BLOCK_SCULK_SHRIEKER_SHRIEK, SoundCategory.PLAYERS, 1f, 1f);
                 target.getActiveStatusEffects().forEach((s,si)->{
                     attacker.addStatusEffect(si);
@@ -49,14 +50,15 @@ public class EnderScythe extends Scythe {
     }
 
     @Override
-    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, RegistryWrapper.WrapperLookup lookup, @Nullable ServerPlayerEntity player) {
-        var itemStack1 = super.getPolymerItemStack(itemStack, tooltipType, lookup, player);
-        if (player != null) {
-            if (itemStack1.getItem().equals(Items.TIPPED_ARROW) && PolymerResourcePackUtils.hasPack(player, player.getUuid())) {
+    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, PacketContext context) {
+        var itemStack1 = super.getPolymerItemStack(itemStack, tooltipType, context);
+        if (context.getPlayer() != null) {
+            if (itemStack1.getItem().equals(Items.TIPPED_ARROW) && PolymerResourcePackUtils.hasPack(context.getPlayer(), context.getPlayer().getUuid())) {
                 itemStack1.set(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Potions.WEAKNESS));
             }
         }
         return itemStack1;
     }
+
 
 }

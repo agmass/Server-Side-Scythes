@@ -13,8 +13,8 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -32,10 +32,11 @@ public class GolemScythe extends Scythe {
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+    public ActionResult use(World world, PlayerEntity user, Hand hand) {
         if (user instanceof ServerPlayerEntity spe) {
-            if (!spe.getItemCooldownManager().isCoolingDown(this)) {
-                spe.getItemCooldownManager().set(this, 20*5);
+            ItemStack stack = user.getStackInHand(hand);
+            if (!spe.getItemCooldownManager().isCoolingDown(stack)) {
+                spe.getItemCooldownManager().set(stack, 20*5);
                 spe.setVelocity(0, 1,0);
                 user.getWorld().playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_IRON_GOLEM_DAMAGE, SoundCategory.PLAYERS, 1f, 1f);
                 spe.velocityDirty = true;
@@ -55,8 +56,8 @@ public class GolemScythe extends Scythe {
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (attacker instanceof ServerPlayerEntity spe) {
-            if (!spe.getItemCooldownManager().isCoolingDown(this)) {
-                spe.getItemCooldownManager().set(this, 20*5);
+            if (!spe.getItemCooldownManager().isCoolingDown(stack)) {
+                spe.getItemCooldownManager().set(stack, 20*5);
                 target.setVelocity(0, 1,0);
                 target.getWorld().playSound(null, target.getX(), target.getY(), target.getZ(), SoundEvents.ENTITY_IRON_GOLEM_DAMAGE, SoundCategory.PLAYERS, 1f, 1f);
                 target.velocityDirty = true;
