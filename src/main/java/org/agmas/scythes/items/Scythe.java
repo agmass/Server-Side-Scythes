@@ -71,9 +71,12 @@ public class Scythe extends Item implements PolymerItem, PolymerKeepModel, Polym
         return !miner.isCreative();
     }
 
-    public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    @Override
+    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         stack.damage(1, attacker, EquipmentSlot.MAINHAND);
+        return super.postHit(stack, target, attacker);
     }
+
     @Override
     public Item getPolymerItem(ItemStack itemStack, PacketContext context) {
         if (context.getPlayer() == null) return item;
