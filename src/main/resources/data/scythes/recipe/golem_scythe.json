@@ -6,12 +6,8 @@
     " R "
   ],
   "key": {
-    "W": {
-      "item": "minecraft:iron_block"
-    },
-    "R": {
-      "item": "minecraft:stick"
-    }
+    "W": ["minecraft:iron_block"],
+    "R": ["minecraft:stick"]
   },
   "result": {
     "id": "scythes:golem_scythe",

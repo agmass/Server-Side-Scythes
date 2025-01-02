@@ -6,12 +6,8 @@
     " R "
   ],
   "key": {
-    "W": {
-      "item": "minecraft:iron_ingot"
-    },
-    "R": {
-      "item": "minecraft:stick"
-    }
+    "W": ["minecraft:iron_ingot"],
+    "R": ["minecraft:stick"]
   },
   "result": {
     "id": "scythes:iron_scythe",

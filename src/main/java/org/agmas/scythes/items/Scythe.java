@@ -89,11 +89,11 @@ public class Scythe extends Item implements PolymerItem, PolymerKeepModel, Polym
 
     @Override
     public @Nullable Identifier getPolymerItemModel(ItemStack stack, PacketContext context) {
-        if (context.getPlayer() == null) return Identifier.of("scythes", modelName);
+        if (context.getPlayer() == null) return Identifier.of("minecraft", item.toString().split(":")[1]);
         if (PolymerServerNetworking.getMetadata(context.getPlayer().networkHandler, Scythes.REGISTER_PACKET, NbtInt.TYPE) != null) {
-            return null;
-        } else {
             return Identifier.of("scythes", modelName);
+        } else {
+            return Identifier.of("minecraft", item.toString().split(":")[1]);
         }
     }
 

@@ -69,7 +69,7 @@ public class ScythesItems {
             "border_scythe"
     );
         public static final Item BAN_SCYTHE = register(
-            new BanScythe(new Item.Settings().attributeModifiers(Scythe.createAttributeModifiers(ToolMaterial.DIAMOND, 4f, -3.2F)), ToolMaterial.DIAMOND, "border_scythe", Items.TIPPED_ARROW),
+            new BanScythe(new Item.Settings().attributeModifiers(Scythe.createAttributeModifiers(ToolMaterial.DIAMOND, 4f, -3.2F)), ToolMaterial.DIAMOND, "ban_scythe", Items.TIPPED_ARROW),
             "ban_scythe"
     );
     public static final Item GROWTH_SCYTHE = register(

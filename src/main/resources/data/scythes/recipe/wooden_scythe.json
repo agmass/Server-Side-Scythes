@@ -6,12 +6,8 @@
     " R "
   ],
   "key": {
-    "W": {
-      "tag": "minecraft:planks"
-    },
-    "R": {
-      "item": "minecraft:stick"
-    }
+    "W": "#minecraft:planks",
+    "R": ["minecraft:stick"]
   },
   "result": {
     "id": "scythes:wooden_scythe",

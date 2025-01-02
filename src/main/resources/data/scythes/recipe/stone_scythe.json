@@ -6,12 +6,8 @@
     " R "
   ],
   "key": {
-    "W": {
-      "tag": "minecraft:stone_tool_materials"
-    },
-    "R": {
-      "item": "minecraft:stick"
-    }
+    "W": "#minecraft:stone_tool_materials",
+    "R": ["minecraft:stick"]
   },
   "result": {
     "id": "scythes:stone_scythe",
