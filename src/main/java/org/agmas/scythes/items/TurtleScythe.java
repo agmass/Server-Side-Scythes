@@ -1,9 +1,5 @@
 package org.agmas.scythes.items;
 
-import eu.pb4.polymer.common.api.PolymerCommonUtils;
-import eu.pb4.polymer.core.api.item.PolymerItem;
-import eu.pb4.polymer.networking.api.server.PolymerServerNetworking;
-import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
@@ -26,13 +22,11 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.agmas.scythes.Scythes;
-import org.jetbrains.annotations.Nullable;
-import xyz.nucleoid.packettweaker.PacketContext;
 
 public class TurtleScythe extends Scythe {
 
-    public TurtleScythe(Settings settings, ToolMaterial material, String modelName, Item item) {
-        super(settings,material,modelName,item);
+    public TurtleScythe(Settings settings, ToolMaterial material) {
+        super(settings,material);
     }
 
     @Override
@@ -58,16 +52,5 @@ public class TurtleScythe extends Scythe {
             attacker.velocityModified = true;
         }
         return super.postHit(stack, target, attacker);
-    }
-
-    @Override
-    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, PacketContext context) {
-        var itemStack1 = super.getPolymerItemStack(itemStack, tooltipType, context);
-        if (context.getPlayer() != null) {
-            if (itemStack1.getItem().equals(Items.TIPPED_ARROW) && PolymerResourcePackUtils.hasPack(context.getPlayer(), context.getPlayer().getUuid())) {
-                itemStack1.set(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Potions.LUCK));
-            }
-        }
-        return itemStack1;
     }
 }

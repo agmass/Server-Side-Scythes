@@ -6,8 +6,12 @@
     " R "
   ],
   "key": {
-    "W": ["minecraft:ice"],
-    "R": ["minecraft:stick"]
+    "W": {
+      "item": "minecraft:ice"
+    },
+    "R": {
+      "item": "minecraft:stick"
+    }
   },
   "result": {
     "id": "scythes:ice_scythe",

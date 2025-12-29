@@ -1,11 +1,10 @@
 package org.agmas.scythes.items;
 
-import eu.pb4.polymer.networking.api.server.PolymerServerNetworking;
-import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
@@ -23,16 +22,14 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.agmas.scythes.Scythes;
-import org.jetbrains.annotations.Nullable;
-import xyz.nucleoid.packettweaker.PacketContext;
 
 import java.util.List;
 import java.util.Random;
 
 public class IceScythe extends Scythe {
 
-    public IceScythe(Settings settings, ToolMaterial material, String modelName, Item item) {
-        super(settings,material,modelName,item);
+    public IceScythe(Settings settings, ToolMaterial material) {
+        super(settings,material);
     }
 
     @Override
@@ -41,10 +38,15 @@ public class IceScythe extends Scythe {
     }
 
     @Override
+    public float getBonusAttackDamage(Entity target, float baseAttackDamage, DamageSource damageSource) {
+        return damageSource.getAttacker().getFrozenTicks() > 0 ? baseAttackDamage : super.getBonusAttackDamage(target,baseAttackDamage,damageSource);
+    }
+
+    @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (attacker instanceof ServerPlayerEntity spe) {
-            if (!spe.getItemCooldownManager().isCoolingDown(stack)) {
-                spe.getItemCooldownManager().set(stack, 20 * 3);
+            if (!spe.getItemCooldownManager().isCoolingDown(stack.getItem())) {
+                spe.getItemCooldownManager().set(stack.getItem(), 20 * 3);
                 target.setFrozenTicks(300);
                 target.getWorld().playSound(null, target.getX(), target.getY(), target.getZ(), SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.PLAYERS, 1f, 1f);
             }
@@ -52,16 +54,10 @@ public class IceScythe extends Scythe {
         return super.postHit(stack, target, attacker);
     }
 
-
-
     @Override
-    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, PacketContext context) {
-        var itemStack1 = super.getPolymerItemStack(itemStack, tooltipType, context);
-        if (context.getPlayer() != null) {
-            if (itemStack1.getItem().equals(Items.TIPPED_ARROW) && PolymerResourcePackUtils.hasPack(context.getPlayer(), context.getPlayer().getUuid())) {
-                itemStack1.set(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Potions.SWIFTNESS));
-            }
-        }
-        return itemStack1;
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+        tooltip.add(Text.of("Deals 2x damage when frozen."));
+        tooltip.add(Text.of("Freezes enemies."));
+        super.appendTooltip(stack, context, tooltip, type);
     }
 }

@@ -1,6 +1,5 @@
 package org.agmas.scythes.items;
 
-import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.Entity;
@@ -18,15 +17,12 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
 import org.agmas.scythes.Scythes;
 import org.agmas.scythes.util.BorderRoom;
-import org.jetbrains.annotations.Nullable;
-import xyz.nucleoid.packettweaker.PacketContext;
-
 import java.util.Random;
 
 public class BorderScythe extends Scythe {
 
-    public BorderScythe(Settings settings, ToolMaterial material, String modelName, Item item) {
-        super(settings,material,modelName,item);
+    public BorderScythe(Settings settings, ToolMaterial material) {
+        super(settings,material);
     }
 
     @Override
@@ -46,21 +42,10 @@ public class BorderScythe extends Scythe {
         if (!alreadyInBorder) {
             BorderRoom room = new BorderRoom(attacker,target,attacker.getBlockPos());
             Scythes.borderRooms.add(room);
-            room.activate();
+            room.activate(24);
         }
         return super.postHit(stack, target, attacker);
     }
 
-
-    @Override
-    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, PacketContext context) {
-        var itemStack1 = super.getPolymerItemStack(itemStack, tooltipType, context);
-        if (context.getPlayer() != null) {
-            if (itemStack1.getItem().equals(Items.TIPPED_ARROW) && PolymerResourcePackUtils.hasPack(context.getPlayer(), context.getPlayer().getUuid())) {
-                itemStack1.set(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Potions.MUNDANE));
-            }
-        }
-        return itemStack1;
-    }
 
 }

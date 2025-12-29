@@ -6,9 +6,15 @@
     " R "
   ],
   "key": {
-    "W": ["minecraft:diamond"],
-    "E": ["minecraft:nether_star"],
-    "R": ["minecraft:stick"]
+    "W": {
+      "item": "minecraft:diamond"
+    },
+    "E": {
+      "item": "minecraft:nether_star"
+    },
+    "R": {
+      "item": "minecraft:stick"
+    }
   },
   "result": {
     "id": "scythes:border_scythe",

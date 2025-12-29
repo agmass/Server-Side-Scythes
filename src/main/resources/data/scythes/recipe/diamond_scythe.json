@@ -6,8 +6,12 @@
     " R "
   ],
   "key": {
-    "W": ["minecraft:diamond"],
-    "R": ["minecraft:stick"]
+    "W": {
+      "item": "minecraft:diamond"
+    },
+    "R": {
+      "item": "minecraft:stick"
+    }
   },
   "result": {
     "id": "scythes:diamond_scythe",

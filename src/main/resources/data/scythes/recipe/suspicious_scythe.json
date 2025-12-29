@@ -6,11 +6,21 @@
     " R "
   ],
   "key": {
-    "W": ["minecraft:poisonous_potato"],
-    "R": ["minecraft:stick"],
-    "E": ["minecraft:spider_eye"],
-    "F": ["minecraft:rotten_flesh"],
-    "J": ["minecraft:pufferfish"]
+    "W": {
+      "item": "minecraft:poisonous_potato"
+    },
+    "R": {
+      "item": "minecraft:stick"
+    },
+    "E": {
+      "item": "minecraft:spider_eye"
+    },
+    "F": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "J": {
+      "item": "minecraft:pufferfish"
+    }
   },
   "result": {
     "id": "scythes:suspicious_scythe",

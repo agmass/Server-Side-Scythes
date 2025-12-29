@@ -6,8 +6,12 @@
     "WWW"
   ],
   "key": {
-    "W": ["minecraft:blaze_powder"],
-    "R": ["scythes:golden_scythe"]
+    "W": {
+      "item": "minecraft:blaze_powder"
+    },
+    "R": {
+      "item": "scythes:golden_scythe"
+    }
   },
   "result": {
     "id": "scythes:growth_scythe",

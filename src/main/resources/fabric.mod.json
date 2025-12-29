@@ -15,6 +15,9 @@
     ],
     "client": [
       "org.agmas.scythes.ScythesClient"
+    ],
+    "fabric-datagen": [
+      "org.agmas.scythes.datagen.ScythesDatagen"
     ]
   },
   "mixins": [

@@ -6,8 +6,12 @@
     " R "
   ],
   "key": {
-    "W": ["minecraft:turtle_scute"],
-    "R": ["minecraft:stick"]
+    "W": {
+      "item": "minecraft:turtle_scute"
+    },
+    "R": {
+      "item": "minecraft:stick"
+    }
   },
   "result": {
     "id": "scythes:turtle_scythe",

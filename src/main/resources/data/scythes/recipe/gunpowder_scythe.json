@@ -6,8 +6,12 @@
     " R "
   ],
   "key": {
-    "W": ["minecraft:gunpowder"],
-    "R": ["minecraft:stick"]
+    "W": {
+      "item": "minecraft:gunpowder"
+    },
+    "R": {
+      "item": "minecraft:stick"
+    }
   },
   "result": {
     "id": "scythes:gunpowder_scythe",

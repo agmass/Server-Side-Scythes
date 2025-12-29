@@ -1,6 +1,5 @@
 package org.agmas.scythes.items;
 
-import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.Entity;
@@ -17,22 +16,20 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
-import org.jetbrains.annotations.Nullable;
-import xyz.nucleoid.packettweaker.PacketContext;
 
 import java.util.List;
 
 public class EnderScythe extends Scythe {
 
-    public EnderScythe(Settings settings, ToolMaterial material, String modelName, Item item) {
-        super(settings,material,modelName,item);
+    public EnderScythe(Settings settings, ToolMaterial material) {
+        super(settings,material);
     }
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (attacker instanceof ServerPlayerEntity spe) {
-            if (!spe.getItemCooldownManager().isCoolingDown(stack)) {
-                spe.getItemCooldownManager().set(stack, 20*15);
+            if (!spe.getItemCooldownManager().isCoolingDown(stack.getItem())) {
+                spe.getItemCooldownManager().set(stack.getItem(), 20*15);
                 spe.getWorld().playSound(null, target.getX(), target.getY(), target.getZ(), SoundEvents.BLOCK_SCULK_SHRIEKER_SHRIEK, SoundCategory.PLAYERS, 1f, 1f);
                 target.getActiveStatusEffects().forEach((s,si)->{
                     attacker.addStatusEffect(si);
@@ -48,17 +45,5 @@ public class EnderScythe extends Scythe {
         tooltip.add(Text.of("Steals status effects from the victim."));
         super.appendTooltip(stack, context, tooltip, type);
     }
-
-    @Override
-    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, PacketContext context) {
-        var itemStack1 = super.getPolymerItemStack(itemStack, tooltipType, context);
-        if (context.getPlayer() != null) {
-            if (itemStack1.getItem().equals(Items.TIPPED_ARROW) && PolymerResourcePackUtils.hasPack(context.getPlayer(), context.getPlayer().getUuid())) {
-                itemStack1.set(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Potions.WEAKNESS));
-            }
-        }
-        return itemStack1;
-    }
-
 
 }

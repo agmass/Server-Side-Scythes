@@ -3,12 +3,12 @@
   "template": {
     "item": "minecraft:netherite_upgrade_smithing_template"
   },
-  "base": [
-    "scythes:diamond_scythe"
-  ],
-  "addition": [
-    "minecraft:netherite_ingot"
-  ],
+  "base": {
+    "item": "scythes:diamond_scythe"
+  },
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
   "result": {
     "id": "scythes:netherite_scythe"
   }

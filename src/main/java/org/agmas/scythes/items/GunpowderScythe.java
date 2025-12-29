@@ -1,6 +1,5 @@
 package org.agmas.scythes.items;
 
-import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.Entity;
@@ -18,13 +17,11 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
 import org.agmas.scythes.Scythes;
-import org.jetbrains.annotations.Nullable;
-import xyz.nucleoid.packettweaker.PacketContext;
 
 public class GunpowderScythe extends Scythe {
 
-    public GunpowderScythe(Settings settings, ToolMaterial material, String modelName, Item item) {
-        super(settings,material,modelName,item);
+    public GunpowderScythe(Settings settings, ToolMaterial material) {
+        super(settings,material);
     }
 
     @Override
@@ -38,15 +35,5 @@ public class GunpowderScythe extends Scythe {
             attacker.getWorld().createExplosion(null, attacker.getX(), attacker.getY(), attacker.getZ(), 2.3f, World.ExplosionSourceType.MOB);
         }
         return super.postHit(stack, target, attacker);
-    }
-    @Override
-    public ItemStack getPolymerItemStack(ItemStack itemStack, TooltipType tooltipType, PacketContext context) {
-        var itemStack1 = super.getPolymerItemStack(itemStack, tooltipType, context);
-        if (context.getPlayer() != null) {
-            if (itemStack1.getItem().equals(Items.TIPPED_ARROW) && PolymerResourcePackUtils.hasPack(context.getPlayer(), context.getPlayer().getUuid())) {
-                itemStack1.set(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Potions.INVISIBILITY));
-            }
-        }
-        return itemStack1;
     }
 }
